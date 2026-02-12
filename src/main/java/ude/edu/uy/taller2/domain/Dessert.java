@@ -1,4 +1,4 @@
-package ude.edu.uy.taller2.model;
+package ude.edu.uy.taller2.domain;
 
 import java.math.BigDecimal;
 

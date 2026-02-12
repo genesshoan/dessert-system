@@ -1,12 +1,12 @@
-package ude.edu.uy.taller2.model;
+package ude.edu.uy.taller2.domain;
 
 import java.math.BigDecimal;
 
-public class LishtDessert extends Dessert{
+public class LightDessert extends Dessert{
     private String sweetener;
     private String description;
 
-    public LishtDessert(String code, String name, BigDecimal price, String sweetener, String description) {
+    public LightDessert(String code, String name, BigDecimal price, String sweetener, String description) {
         super(code, name, price);
         this.sweetener = sweetener;
         this.description = description;
