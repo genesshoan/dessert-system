@@ -1,6 +1,6 @@
 package ude.edu.uy.taller2.domain;
 
-import ude.edu.uy.taller2.dto.SaleSummaryDTO;
+import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 import ude.edu.uy.taller2.exception.MaxUnitsExceededException;
 
 import java.math.BigDecimal;
@@ -131,7 +131,7 @@ public class Sale {
         targetItem.setQuantity(targetItem.getQuantity() - quantity);
     }
 
-    public SaleSummaryDTO getSaleSummaryByDessert(String code) {
+    public SalesSummaryDTO getSaleSummaryByDessert(String code) {
         int totalUnits = 0;
         BigDecimal totalAmount = BigDecimal.ZERO;
 
@@ -141,6 +141,6 @@ public class Sale {
                     saleItem.getTotalAmount());
         }
 
-        return new SaleSummaryDTO(totalUnits, totalAmount);
+        return new SalesSummaryDTO(totalUnits, totalAmount);
     }
 }

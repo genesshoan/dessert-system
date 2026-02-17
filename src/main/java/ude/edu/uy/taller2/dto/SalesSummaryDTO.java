@@ -2,11 +2,11 @@ package ude.edu.uy.taller2.dto;
 
 import java.math.BigDecimal;
 
-public class SaleSummaryDTO {
+public class SalesSummaryDTO {
     private int totalUnits;
     private BigDecimal totalAmount;
 
-    public SaleSummaryDTO(int totalUnits, BigDecimal totalAmount) {
+    public SalesSummaryDTO(int totalUnits, BigDecimal totalAmount) {
         this.totalUnits = totalUnits;
         this.totalAmount = totalAmount;
     }

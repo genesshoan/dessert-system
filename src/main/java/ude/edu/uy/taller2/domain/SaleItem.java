@@ -1,6 +1,6 @@
 package ude.edu.uy.taller2.domain;
 
-import ude.edu.uy.taller2.dto.SaleSummaryDTO;
+import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 
 import java.math.BigDecimal;
 
@@ -29,7 +29,7 @@ public class SaleItem {
         this.quantity = quantity;
     }
 
-    public SaleSummaryDTO saleSummary(){
-        return new SaleSummaryDTO(quantity, getTotalAmount());
+    public SalesSummaryDTO saleSummary(){
+        return new SalesSummaryDTO(quantity, getTotalAmount());
     }
 }
