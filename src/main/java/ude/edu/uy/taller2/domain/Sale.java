@@ -99,7 +99,7 @@ public class Sale {
         if (targetItem == null) {
             saleItems.add(new SaleItem(units, dessert));
         } else {
-            targetItem.setQuantity(totalUnits);
+            targetItem.setQuantity(targetItem.getQuantity() + units);
         }
     }
 
@@ -128,7 +128,11 @@ public class Sale {
             throw new IllegalArgumentException("No more units can be removed than already exist");
         }
 
-        targetItem.setQuantity(targetItem.getQuantity() - quantity);
+        if(targetItem.getQuantity() - quantity == 0) {
+            saleItems.remove(targetItem);
+        } else {
+            targetItem.setQuantity(targetItem.getQuantity() - quantity);
+        }
     }
 
     public SalesSummaryDTO getSaleSummaryByDessert(String code) {
@@ -136,9 +140,11 @@ public class Sale {
         BigDecimal totalAmount = BigDecimal.ZERO;
 
         for (SaleItem saleItem : saleItems) {
-            totalUnits += saleItem.getQuantity();
-            totalAmount = totalAmount.add(
-                    saleItem.getTotalAmount());
+            if(saleItem.getDessert().getCode().equals(code)) {
+                totalUnits += saleItem.getQuantity();
+                totalAmount = totalAmount.add(
+                        saleItem.getTotalAmount());
+            }
         }
 
         return new SalesSummaryDTO(totalUnits, totalAmount);

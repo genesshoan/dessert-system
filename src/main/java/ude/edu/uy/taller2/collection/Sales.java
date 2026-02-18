@@ -7,6 +7,7 @@ import ude.edu.uy.taller2.domain.SaleStatus;
 import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -86,15 +87,18 @@ public class Sales {
         return find(id).getSaleItems();
     }
 
-    public SalesSummaryDTO getSalesByDessert(String code) {
+    public SalesSummaryDTO getSalesByDessert(String code, LocalDate date) {
         BigDecimal totalAmount = BigDecimal.ZERO;
         int totalUnits = 0;
 
         for (Sale sale : sales) {
-            SalesSummaryDTO salesSummaryDTO = sale.getSaleSummaryByDessert(code);
-            totalAmount = totalAmount.add(
-                    salesSummaryDTO.getTotalAmount());
-            totalUnits += salesSummaryDTO.getTotalUnits();
+            if(sale.getStatus() == SaleStatus.COMPLETED
+                && sale.getDate().equals(date)) {
+                SalesSummaryDTO salesSummaryDTO = sale.getSaleSummaryByDessert(code);
+                totalAmount = totalAmount.add(
+                        salesSummaryDTO.getTotalAmount());
+                totalUnits += salesSummaryDTO.getTotalUnits();
+            }
         }
 
         return new SalesSummaryDTO(totalUnits, totalAmount);
