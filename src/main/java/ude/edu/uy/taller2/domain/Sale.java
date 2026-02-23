@@ -2,6 +2,9 @@ package ude.edu.uy.taller2.domain;
 
 import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 import ude.edu.uy.taller2.exception.MaxUnitsExceededException;
+import ude.edu.uy.taller2.exception.InvalidSaleOperationException;
+import ude.edu.uy.taller2.exception.InsufficientUnitsException;
+import ude.edu.uy.taller2.exception.DessertNotFoundException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -128,16 +131,16 @@ public class Sale {
      *
      * @param dessert Postre a añadir.
      * @param units   Cantidad de unidades a añadir (debe ser > 0).
-     * @throws IllegalStateException     Si las unidades no son positivas o la venta no es modificable.
+     * @throws InvalidSaleOperationException Si las unidades no son positivas o la venta no es modificable.
      * @throws MaxUnitsExceededException Si el agregado excede el límite máximo por venta.
      */
     public void addDessertUnits(Dessert dessert, int units) {
         if (units <= 0) {
-            throw new IllegalStateException("Units must be positive");
+            throw new InvalidSaleOperationException("Units must be positive");
         }
 
         if (!checkModifiable()) {
-            throw new IllegalStateException("The sale process is already finished. It cannot be modified");
+            throw new InvalidSaleOperationException("The sale process is already finished. It cannot be modified");
         }
 
         int totalUnits = getTotalUnits() + units;
@@ -167,16 +170,17 @@ public class Sale {
      *
      * @param code     Código del postre a eliminar.
      * @param quantity Cantidad de unidades a eliminar (debe ser > 0 y <= cantidad actual).
-     * @throws IllegalStateException    Si la cantidad no es válida o la venta no es modificable.
-     * @throws IllegalArgumentException Si el postre no existe en la venta o se intenta eliminar más unidades de las existentes.
+     * @throws InvalidSaleOperationException Si la cantidad no es válida o la venta no es modificable.
+     * @throws DessertNotFoundException Si el postre no existe en la venta.
+     * @throws InsufficientUnitsException Si se intenta eliminar más unidades de las existentes.
      */
     public void deleteDessertUnits(String code, int quantity){
         if(quantity <= 0){
-            throw new IllegalStateException("The amount entered is invalid");
+            throw new InvalidSaleOperationException("The amount entered is invalid");
         }
 
         if (!checkModifiable()) {
-            throw new IllegalStateException("The sale is not in process");
+            throw new InvalidSaleOperationException("The sale is not in process");
         }
 
         SaleItem targetItem = null;
@@ -188,11 +192,11 @@ public class Sale {
         }
 
         if (targetItem == null){
-            throw new IllegalArgumentException("The dessert not exist in the sale");
+            throw new DessertNotFoundException("The dessert not exist in the sale");
         }
 
         if (quantity > targetItem.getQuantity()){
-            throw new IllegalArgumentException("No more units can be removed than already exist");
+            throw new InsufficientUnitsException("No more units can be removed than already exist");
         }
 
         if(targetItem.getQuantity() - quantity == 0) {

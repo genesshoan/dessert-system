@@ -7,6 +7,7 @@ import ude.edu.uy.taller2.domain.Dessert;
 import ude.edu.uy.taller2.domain.Sale;
 import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 import ude.edu.uy.taller2.exception.MaxUnitsExceededException;
+import ude.edu.uy.taller2.exception.InsufficientUnitsException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -89,11 +90,11 @@ public class TestSales {
         sales.getDessertsBySaleId(1).forEach(System.out::println);
 
         // Intentar eliminar más unidades de las que existen (debe lanzar excepción)
-        System.out.println("Intentamos eliminar demasiadas unidades (esperamos IllegalArgumentException)");
+        System.out.println("Intentamos eliminar demasiadas unidades (esperamos InsufficientUnitsException)");
         try {
             sales.deleteDessertUnits(1, "tiramisu01", 10);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Capturada IllegalArgumentException: " + e.getMessage());
+        } catch (InsufficientUnitsException e) {
+            System.out.println("Capturada InsufficientUnitsException: " + e.getMessage());
         }
 
         // Intentar exceder el máximo por venta
@@ -108,7 +109,7 @@ public class TestSales {
         SalesSummaryDTO summary = sales.getSalesByDessert("flan_con_dulce123", LocalDate.now());
         System.out.println("Total unidades (flan_con_dulce123): " + summary.getTotalUnits());
         System.out.println("Monto total (flan_con_dulce123): " + summary.getTotalAmount());
-        System.out.println("-- Completamos la venta 1");
+        TestHelpers.printSub("Completamos la venta 1");
         sales.finalizeSale(1, SaleDecision.COMPLETE);
         summary = sales.getSalesByDessert("flan_con_dulce123", LocalDate.now());
         System.out.println("Total unidades (flan_con_dulce123): " + summary.getTotalUnits());

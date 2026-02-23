@@ -5,6 +5,8 @@ import ude.edu.uy.taller2.domain.Sale;
 import ude.edu.uy.taller2.domain.SaleItem;
 import ude.edu.uy.taller2.domain.SaleStatus;
 import ude.edu.uy.taller2.dto.SalesSummaryDTO;
+import ude.edu.uy.taller2.exception.SaleNotFoundException;
+import ude.edu.uy.taller2.exception.InvalidSaleOperationException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -89,19 +91,19 @@ public class Sales {
      *
      * @param saleId Identificador de la venta.
      * @param action Acción a ejecutar (COMPLETE para finalizar, CANCEL para eliminar).
-     * @throws IllegalArgumentException Si no existe la venta con el id dado.
-     * @throws IllegalStateException    Si la venta ya fue completada.
+     * @throws SaleNotFoundException Si no existe la venta con el id dado.
+     * @throws InvalidSaleOperationException    Si la venta ya fue completada.
      */
     public void finalizeSale(long saleId, SaleDecision action) {
         Sale sale = find(saleId);
 
         if (sale == null) {
-            throw new IllegalArgumentException
+            throw new SaleNotFoundException
                     ("There is no sales process with the provided identifier");
         }
 
         if (sale.getStatus() == SaleStatus.COMPLETED) {
-            throw new IllegalStateException
+            throw new InvalidSaleOperationException
                     ("The sale has already been completed.");
         }
 
