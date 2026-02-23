@@ -29,4 +29,14 @@ public class SalesSummaryDTO {
     public BigDecimal getTotalAmount() {
         return totalAmount;
     }
+
+    /**
+     * Representación en cadena legible del resumen de ventas.
+     * Formato: SalesSummaryDTO{totalUnits=10, totalAmount=1234.56}
+     */
+    @Override
+    public String toString() {
+        return String.format("SalesSummaryDTO{totalUnits=%d, totalAmount=%s}",
+                totalUnits, totalAmount == null ? "0" : totalAmount.toPlainString());
+    }
 }
