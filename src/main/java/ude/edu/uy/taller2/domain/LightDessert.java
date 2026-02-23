@@ -1,11 +1,12 @@
 package ude.edu.uy.taller2.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * Subclase de Dessert que representa un postre light con edulcorante y descripción.
  */
-public class LightDessert extends Dessert{
+public class LightDessert extends Dessert implements Serializable {
     private String sweetener;
     private String description;
 

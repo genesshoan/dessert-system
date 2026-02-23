@@ -2,13 +2,14 @@ package ude.edu.uy.taller2.domain;
 
 import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * Representa un item dentro de una venta: un postre y la cantidad vendida.
  * Proporciona utilidades para obtener el monto total del item y su resumen.
  */
-public class SaleItem {
+public class SaleItem implements Serializable {
     private int quantity;
     private Dessert dessert;
 

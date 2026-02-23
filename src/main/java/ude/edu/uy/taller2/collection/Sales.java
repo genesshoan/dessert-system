@@ -8,6 +8,7 @@ import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 import ude.edu.uy.taller2.exception.SaleNotFoundException;
 import ude.edu.uy.taller2.exception.InvalidSaleOperationException;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -17,7 +18,7 @@ import java.util.List;
  * Gestión en memoria de múltiples ventas. Proporciona operaciones para insertar,
  * buscar, modificar y finalizar ventas.
  */
-public class Sales {
+public class Sales implements Serializable {
     private final LinkedList<Sale> sales;
     private long lastId = 0;
 

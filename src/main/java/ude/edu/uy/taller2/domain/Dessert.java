@@ -1,11 +1,12 @@
 package ude.edu.uy.taller2.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * Representa un postre con código, nombre y precio.
  */
-public class Dessert {
+public class Dessert implements Serializable {
     private String code;
     private String name;
     private BigDecimal price;

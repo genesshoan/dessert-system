@@ -2,13 +2,14 @@ package ude.edu.uy.taller2.collection;
 
 import ude.edu.uy.taller2.domain.Dessert;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.TreeMap;
 
 /**
  * Catálogo en memoria de postres, indexados por código.
  */
-public class Desserts {
+public class Desserts implements Serializable {
     private final TreeMap<String, Dessert> desserts;
 
     /**

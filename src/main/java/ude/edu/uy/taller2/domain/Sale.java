@@ -6,6 +6,7 @@ import ude.edu.uy.taller2.exception.InvalidSaleOperationException;
 import ude.edu.uy.taller2.exception.InsufficientUnitsException;
 import ude.edu.uy.taller2.exception.DessertNotFoundException;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -18,7 +19,7 @@ import java.util.List;
  * estado y la lista de items (postres y cantidades). Controla operaciones
  * básicas como añadir o eliminar unidades y obtener resúmenes.
  */
-public class Sale {
+public class Sale implements Serializable {
     private final int MAX_UNITS_PER_SALE = 40;
 
     private long id;
