@@ -135,7 +135,7 @@ public class Sale implements Serializable {
      * @throws InvalidSaleOperationException Si las unidades no son positivas o la venta no es modificable.
      * @throws MaxUnitsExceededException Si el agregado excede el límite máximo por venta.
      */
-    public void addDessertUnits(Dessert dessert, int units) {
+    public void addDessertUnits(Dessert dessert, int units) throws InvalidSaleOperationException, MaxUnitsExceededException {
         if (units <= 0) {
             throw new InvalidSaleOperationException("Units must be positive");
         }
@@ -175,7 +175,7 @@ public class Sale implements Serializable {
      * @throws DessertNotFoundException Si el postre no existe en la venta.
      * @throws InsufficientUnitsException Si se intenta eliminar más unidades de las existentes.
      */
-    public void deleteDessertUnits(String code, int quantity){
+    public void deleteDessertUnits(String code, int quantity) throws InvalidSaleOperationException, DessertNotFoundException, InsufficientUnitsException{
         if(quantity <= 0){
             throw new InvalidSaleOperationException("The amount entered is invalid");
         }

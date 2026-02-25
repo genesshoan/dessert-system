@@ -16,7 +16,7 @@ import java.time.LocalDate;
  * Cubre añadir/eliminar unidades, excepciones personalizadas y resúmenes.
  */
 public class TestSale {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // Creo las instancias necesarias
         Sale sale = new Sale(0, LocalDate.now(), "Calle Juan Zorrilla de San Martin, esq. P. Pablo Davit S/N");
         Dessert flan = new Dessert("flan12", "Flan con dulce de leche", BigDecimal.valueOf(190.3));

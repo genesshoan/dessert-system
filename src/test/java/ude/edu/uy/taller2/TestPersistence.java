@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class TestPersistence {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // Creamos las colecciones
         Desserts desserts = new Desserts();
         Sales sales = new Sales();

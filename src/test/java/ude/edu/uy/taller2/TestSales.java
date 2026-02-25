@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class TestSales {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Sales sales = new Sales();
 
         // Crear ventas iniciales
