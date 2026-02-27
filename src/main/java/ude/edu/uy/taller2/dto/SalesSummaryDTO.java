@@ -1,11 +1,12 @@
 package ude.edu.uy.taller2.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * DTO que contiene el resumen de ventas para un postre: unidades y monto total.
  */
-public class SalesSummaryDTO {
+public class SalesSummaryDTO implements Serializable {
     private int totalUnits;
     private BigDecimal totalAmount;
 

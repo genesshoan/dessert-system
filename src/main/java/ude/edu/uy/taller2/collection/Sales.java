@@ -7,6 +7,9 @@ import ude.edu.uy.taller2.domain.SaleStatus;
 import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 import ude.edu.uy.taller2.exception.SaleNotFoundException;
 import ude.edu.uy.taller2.exception.InvalidSaleOperationException;
+import ude.edu.uy.taller2.exception.DessertNotFoundException;
+import ude.edu.uy.taller2.exception.InsufficientUnitsException;
+import ude.edu.uy.taller2.exception.MaxUnitsExceededException;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -45,7 +48,7 @@ public class Sales implements Serializable {
      *
      * @param sale Venta a insertar.
      */
-    public void insert(Sale sale){
+    public void insert(Sale sale) {
         sale.setId(++lastId);
         sales.add(sale);
     }
@@ -69,8 +72,10 @@ public class Sales implements Serializable {
      * @param id      Identificador de la venta.
      * @param dessert Postre a añadir.
      * @param units   Cantidad de unidades a añadir.
+     * @throws InvalidSaleOperationException Si las unidades no son válidas o la venta no es modificable.
+     * @throws MaxUnitsExceededException Si el agregado excede el límite máximo por venta.
      */
-    public void addDessertUnits(long id, Dessert dessert, int units) {
+    public void addDessertUnits(long id, Dessert dessert, int units) throws InvalidSaleOperationException, MaxUnitsExceededException {
         find(id).addDessertUnits(dessert, units);
     }
 
@@ -80,8 +85,11 @@ public class Sales implements Serializable {
      * @param saleId  Identificador de la venta.
      * @param code    Código del postre.
      * @param quantity Cantidad a eliminar.
+     * @throws InvalidSaleOperationException Si la cantidad no es válida o la venta no es modificable.
+     * @throws DessertNotFoundException Si el postre no existe en la venta.
+     * @throws InsufficientUnitsException Si se intenta eliminar más unidades de las existentes.
      */
-    public void deleteDessertUnits(long saleId, String code, int quantity) {
+    public void deleteDessertUnits(long saleId, String code, int quantity) throws InvalidSaleOperationException, DessertNotFoundException, InsufficientUnitsException {
         Sale sale = find((saleId));
 
         sale.deleteDessertUnits(code, quantity);
@@ -95,7 +103,7 @@ public class Sales implements Serializable {
      * @throws SaleNotFoundException Si no existe la venta con el id dado.
      * @throws InvalidSaleOperationException    Si la venta ya fue completada.
      */
-    public void finalizeSale(long saleId, SaleDecision action) {
+    public void finalizeSale(long saleId, SaleDecision action) throws SaleNotFoundException, InvalidSaleOperationException {
         Sale sale = find(saleId);
 
         if (sale == null) {
@@ -168,5 +176,13 @@ public class Sales implements Serializable {
         }
 
         return new SalesSummaryDTO(totalUnits, totalAmount);
+    }
+
+    public LocalDate getLastSaleDate() {
+        if (sales.isEmpty()) {
+            return null;
+        }
+
+        return sales.getLast().getDate();
     }
 }
