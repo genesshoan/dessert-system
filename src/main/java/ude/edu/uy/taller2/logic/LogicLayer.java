@@ -20,16 +20,17 @@ import java.util.List;
 public class LogicLayer extends UnicastRemoteObject implements ILogicLayer {
     private static LogicLayer instance = null;
 
-    private Monitor monitor;
-    private Sales sales;
-    private Desserts desserts;
+    private final Monitor monitor;
+    private final Sales sales;
+    private final Desserts desserts;
 
     private LogicLayer() throws RemoteException {
         sales = new Sales();
         desserts = new Desserts();
+        this.monitor = new Monitor();
     }
 
-    private static LogicLayer getInstance() throws RemoteException {
+    public static LogicLayer getInstance() throws RemoteException {
         if (instance == null) {
             synchronized (LogicLayer.class) {
                 if (instance == null) {
@@ -177,7 +178,8 @@ public class LogicLayer extends UnicastRemoteObject implements ILogicLayer {
             SaleNotFoundException, InvalidSaleOperationException, DessertNotFoundException, InsufficientUnitsException {
         monitor.requireWrite();
 
-        if (desserts.member(dessertCode)){
+        // Corregimos la condición: si NO existe el postre, lanzamos la excepción
+        if (!desserts.member(dessertCode)){
             throw new DessertNotFoundException("There is no dessert with the provided identifier");
         }
 
