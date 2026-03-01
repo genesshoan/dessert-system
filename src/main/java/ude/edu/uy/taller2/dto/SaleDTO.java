@@ -33,4 +33,10 @@ public class SaleDTO implements Serializable {
     public SaleStatus getStatus() {
         return status;
     }
+
+    @Override
+    public String toString() {
+        return String.format("SaleDTO{id=%d, date=%s, address=%s, status=%s}",
+                id, date == null ? "null" : date.toString(), address, status == null ? "null" : status.name());
+    }
 }

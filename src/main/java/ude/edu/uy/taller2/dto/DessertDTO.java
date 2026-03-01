@@ -26,4 +26,10 @@ public class DessertDTO implements Serializable {
     public BigDecimal getPrice(){
         return price;
     }
+
+    @Override
+    public String toString() {
+        return String.format("DessertDTO{code=%s, name=%s, price=%s}",
+                code, name, price == null ? "0" : price.toPlainString());
+    }
 }

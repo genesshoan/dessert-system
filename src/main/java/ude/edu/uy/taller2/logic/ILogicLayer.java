@@ -1,7 +1,11 @@
 package ude.edu.uy.taller2.logic;
 
+import ude.edu.uy.taller2.collection.SaleDecision;
+import ude.edu.uy.taller2.collection.SaleFilter;
 import ude.edu.uy.taller2.dto.DessertDTO;
 import ude.edu.uy.taller2.dto.SaleDTO;
+import ude.edu.uy.taller2.dto.SaleItemDTO;
+import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 import ude.edu.uy.taller2.exception.*;
 
 import java.rmi.Remote;
@@ -15,20 +19,17 @@ public interface ILogicLayer extends Remote {
     List<DessertDTO> getAllDesserts() throws RemoteException;
     DessertDTO getDessertByCode(String code) throws RemoteException, RequiredFieldIsEmptyException,
             DessertNotFoundException;
-    void createSale(String address, LocalDate date) throws RemoteException, RequiredFieldIsEmptyException;
+    void createSale(String address, LocalDate date) throws RemoteException, RequiredFieldIsEmptyException, InvalidDateException;
     SaleDTO addDessertUnits(String dessertCode, long saleId, int units) throws RemoteException, RequiredFieldIsEmptyException,
             DessertNotFoundException, SaleNotFoundException, InvalidSaleOperationException, MaxUnitsExceededException;
     void deleteDessertUnits(String dessertCode, long saleId, int units) throws RemoteException,
             SaleNotFoundException, InvalidSaleOperationException, DessertNotFoundException, InsufficientUnitsException;
-
-    // Los siguientes métodos aún no están implementados en LogicLayer.
-    // Para evitar errores de compilación mientras se desarrollan, se comentan temporalmente.
-    /*
-    void finalizeSale(long id, ude.edu.uy.taller2.collection.SaleDecision saleDecision) throws RemoteException;
-    java.util.List<SaleDTO> getSalesByStatus(ude.edu.uy.taller2.collection.SaleFilter saleFilter) throws RemoteException;
-    java.util.List<ude.edu.uy.taller2.dto.SaleItemDTO> getDessertsBySaleId(long id) throws RemoteException;
-    ude.edu.uy.taller2.dto.SalesSummaryDTO getSalesByDessert(String code, LocalDate date) throws RemoteException;
-    void saveData() throws RemoteException;
-    void loadData() throws RemoteException;
-    */
+    void finalizeSale(long id, SaleDecision saleDecision) throws RemoteException, SaleNotFoundException,
+            InvalidSaleOperationException;
+    List<SaleDTO> getSalesByStatus(SaleFilter saleFilter) throws RemoteException;
+    List<SaleItemDTO> getDessertsBySaleId(long id) throws RemoteException, SaleNotFoundException;
+    SalesSummaryDTO getSalesByDessert(String code, LocalDate date) throws RemoteException, RequiredFieldIsEmptyException,
+            DessertNotFoundException;
+    void saveData() throws RemoteException, AppDataPersistenceException;
+    void loadData() throws RemoteException, AppDataPersistenceException;
 }

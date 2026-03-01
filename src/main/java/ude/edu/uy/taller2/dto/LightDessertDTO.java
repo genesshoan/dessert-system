@@ -20,4 +20,11 @@ public class LightDessertDTO extends DessertDTO implements Serializable {
     public String getDescription() {
         return description;
     }
+
+    @Override
+    public String toString() {
+        return String.format("LightDessertDTO{%s, sweetener=%s, description=%s}",
+                super.toString().replaceFirst("DessertDTO", ""),
+                sweetener, description);
+    }
 }

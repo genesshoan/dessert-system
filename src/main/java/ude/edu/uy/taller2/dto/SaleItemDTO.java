@@ -1,14 +1,12 @@
 package ude.edu.uy.taller2.dto;
 
-import ude.edu.uy.taller2.domain.Dessert;
-
 import java.io.Serializable;
 
 public class SaleItemDTO implements Serializable {
     private int quantity;
-    private Dessert dessert;
+    private DessertDTO dessert;
 
-    public SaleItemDTO(int quantity, Dessert dessert) {
+    public SaleItemDTO(int quantity, DessertDTO dessert) {
         this.quantity = quantity;
         this.dessert = dessert;
     }
@@ -17,7 +15,12 @@ public class SaleItemDTO implements Serializable {
         return quantity;
     }
 
-    public Dessert getDessert() {
+    public DessertDTO getDessert() {
         return dessert;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("SaleItemDTO{quantity=%d, dessert=%s}", quantity, dessert == null ? "null" : dessert.toString());
     }
 }

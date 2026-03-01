@@ -1,6 +1,10 @@
 package ude.edu.uy.taller2;
 
+import ude.edu.uy.taller2.collection.SaleDecision;
+import ude.edu.uy.taller2.collection.SaleFilter;
 import ude.edu.uy.taller2.dto.DessertDTO;
+import ude.edu.uy.taller2.dto.SaleItemDTO;
+import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 import ude.edu.uy.taller2.exception.*;
 import ude.edu.uy.taller2.logic.LogicLayer;
 
@@ -31,6 +35,14 @@ public class TestLogicLayer {
         List<DessertDTO> desserts = logic.getAllDesserts();
         desserts.forEach(System.out::println);
 
+        TestHelpers.printSub("Obtener postre por código (d1)");
+        try {
+            DessertDTO d1 = logic.getDessertByCode("d1");
+            System.out.println("getDessertByCode(d1) => " + d1);
+        } catch (RequiredFieldIsEmptyException | ude.edu.uy.taller2.exception.DessertNotFoundException e) {
+            System.out.println("Error al obtener postre: " + e.getMessage());
+        }
+
         TestHelpers.printSub("Creando una venta");
         try {
             logic.createSale("Calle Falsa 123", LocalDate.now());
@@ -47,8 +59,17 @@ public class TestLogicLayer {
         try {
             ude.edu.uy.taller2.dto.SaleDTO saleDTO = logic.addDessertUnits("d1", saleId, 3);
             System.out.println("Después de agregar: " + saleDTO);
-        } catch (RequiredFieldIsEmptyException | DessertNotFoundException | SaleNotFoundException |
-                InvalidSaleOperationException | MaxUnitsExceededException e) {
+
+            TestHelpers.printSub("Items de la venta 1 (getDessertsBySaleId)");
+            try {
+                List<SaleItemDTO> items = logic.getDessertsBySaleId(saleId);
+                items.forEach(System.out::println);
+            } catch (SaleNotFoundException e) {
+                System.out.println("Error al listar items de la venta: " + e.getMessage());
+            }
+
+        } catch (RequiredFieldIsEmptyException | ude.edu.uy.taller2.exception.DessertNotFoundException | ude.edu.uy.taller2.exception.SaleNotFoundException |
+                ude.edu.uy.taller2.exception.InvalidSaleOperationException | ude.edu.uy.taller2.exception.MaxUnitsExceededException e) {
             System.out.println("Error al agregar unidades: " + e.getMessage());
         }
 
@@ -65,6 +86,11 @@ public class TestLogicLayer {
         try {
             logic.deleteDessertUnits("d1", saleId, 2);
             System.out.println("Eliminadas 2 unidades de d1 en la venta " + saleId);
+
+            TestHelpers.printSub("Items de la venta 1 después de borrar unidades");
+            List<SaleItemDTO> itemsAfterDelete = logic.getDessertsBySaleId(saleId);
+            itemsAfterDelete.forEach(System.out::println);
+
         } catch (SaleNotFoundException | InvalidSaleOperationException | DessertNotFoundException | InsufficientUnitsException e) {
             System.out.println("Error al borrar unidades: " + e.getMessage());
         }
@@ -76,6 +102,36 @@ public class TestLogicLayer {
             System.out.println("Capturada DessertNotFoundException: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Otra excepción capturada: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+        }
+
+        TestHelpers.printHeader("Finalizar y cancelar compra");
+
+        try {
+            logic.createSale("Calle Falsa 123", LocalDate.now());
+            logic.createSale("Calle Falsa 123", LocalDate.now());
+            logic.createSale("Calle Falsa 123", LocalDate.now());
+            logic.createSale("Calle Falsa 123", LocalDate.now());
+            logic.createSale("Calle Falsa 123", LocalDate.now());
+
+            logic.addDessertUnits("d1", 2, 13);
+            logic.addDessertUnits("d1", 4, 13);
+        } catch (RequiredFieldIsEmptyException e) {
+            System.out.println("Error al crear venta: " + e.getMessage());
+        }
+
+        TestHelpers.printSub("Completar venta con postres y sin postres");
+
+        logic.finalizeSale(2, SaleDecision.COMPLETE);
+        logic.finalizeSale(3, SaleDecision.COMPLETE);
+        logic.finalizeSale(4, SaleDecision.CANCEL);
+        logic.getSalesByStatus(SaleFilter.ALL).forEach(System.out::println);
+
+        TestHelpers.printSub("Resumen de ventas por postre (d1)");
+        try {
+            SalesSummaryDTO summary = logic.getSalesByDessert("d1", LocalDate.now());
+            System.out.println("SalesSummary for d1 => " + summary);
+        } catch (RequiredFieldIsEmptyException | ude.edu.uy.taller2.exception.DessertNotFoundException e) {
+            System.out.println("Error al obtener resumen de ventas: " + e.getMessage());
         }
 
         TestHelpers.printHeader("Fin Test LogicLayer");
