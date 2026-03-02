@@ -20,7 +20,14 @@ public class Config {
     }
 
     public static String getHost() { return properties.getProperty("server.host"); }
-    public static String getPort() { return properties.getProperty("server.port"); }
+    public static int getPort() {
+        try {
+            return Integer.parseInt(properties.getProperty("server.port", "1099"));
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid port format, using default 1099");
+            return 1099;
+        }
+    }
     public static String getName() { return properties.getProperty("server.name"); }
 
     public static String getURL() {

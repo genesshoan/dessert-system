@@ -14,23 +14,20 @@ public class Server {
         try {
             System.out.println("Starting server...");
 
-            LocateRegistry.createRegistry(
-                    Integer.parseInt(Config.getPort())
-            );
+            LocateRegistry.createRegistry(Config.getPort());
 
             LogicLayer logicLayer = LogicLayer.getInstance();
 
             Naming.rebind(Config.getURL(), logicLayer);
 
             System.out.println("Server is running now...");
+
+            logicLayer.getAllDesserts().forEach(System.out::println);
         } catch (RemoteException | MalformedURLException e) {
             System.out.println("Something unexpected has occurred");
             e.printStackTrace();
         } catch (AppDataPersistenceException e) {
             System.out.println("Something was wrong while loading data");
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid port format, it must be an integer");
             e.printStackTrace();
         }
     }
