@@ -90,9 +90,7 @@ public class Sales implements Serializable {
      * @throws InsufficientUnitsException Si se intenta eliminar más unidades de las existentes.
      */
     public void deleteDessertUnits(long saleId, String code, int quantity) throws InvalidSaleOperationException, DessertNotFoundException, InsufficientUnitsException {
-        Sale sale = find((saleId));
-
-        sale.deleteDessertUnits(code, quantity);
+        find((saleId)).deleteDessertUnits(code, quantity);
     }
 
     /**
