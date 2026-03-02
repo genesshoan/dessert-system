@@ -134,6 +134,62 @@ public class TestLogicLayer {
             System.out.println("Error al obtener resumen de ventas: " + e.getMessage());
         }
 
+        TestHelpers.printHeader("Pruebas adicionales: inputs inválidos, entidades faltantes y persistencia");
+
+        TestHelpers.printSub("Crear venta con dirección vacía (debe lanzar RequiredFieldIsEmptyException)");
+        try {
+            logic.createSale("", LocalDate.now());
+        } catch (RequiredFieldIsEmptyException e) {
+            System.out.println("Capturada RequiredFieldIsEmptyException: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Otra excepción capturada: " + e.getClass().getSimpleName());
+        }
+
+        TestHelpers.printSub("Obtener postre con código vacío (debe lanzar RequiredFieldIsEmptyException)");
+        try {
+            logic.getDessertByCode("");
+        } catch (RequiredFieldIsEmptyException e) {
+            System.out.println("Capturada RequiredFieldIsEmptyException: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Otra excepción capturada: " + e.getClass().getSimpleName());
+        }
+
+        TestHelpers.printSub("Obtener postre inexistente (debe lanzar DessertNotFoundException)");
+        try {
+            logic.getDessertByCode("no-such-code");
+        } catch (ude.edu.uy.taller2.exception.DessertNotFoundException e) {
+            System.out.println("Capturada DessertNotFoundException: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Otra excepción capturada: " + e.getClass().getSimpleName());
+        }
+
+        TestHelpers.printSub("Agregar unidades a venta inexistente (debe lanzar SaleNotFoundException)");
+        try {
+            logic.addDessertUnits("d1", 9999, 1);
+        } catch (SaleNotFoundException e) {
+            System.out.println("Capturada SaleNotFoundException: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Otra excepción capturada: " + e.getClass().getSimpleName());
+        }
+
+        TestHelpers.printSub("Finalizar venta inexistente (debe lanzar SaleNotFoundException)");
+        try {
+            logic.finalizeSale(9999, SaleDecision.COMPLETE);
+        } catch (SaleNotFoundException e) {
+            System.out.println("Capturada SaleNotFoundException: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Otra excepción capturada: " + e.getClass().getSimpleName());
+        }
+
+        TestHelpers.printSub("Probar saveData() y loadData() (persistencia)");
+        try {
+            logic.saveData();
+            logic.loadData();
+            System.out.println("Persistencia: saveData/loadData ejecutadas correctamente");
+        } catch (AppDataPersistenceException e) {
+            System.out.println("Error de persistencia: " + e.getMessage());
+        }
+
         TestHelpers.printHeader("Fin Test LogicLayer");
     }
 }

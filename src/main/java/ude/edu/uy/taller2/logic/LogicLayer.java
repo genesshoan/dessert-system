@@ -87,8 +87,8 @@ public class LogicLayer extends UnicastRemoteObject implements ILogicLayer {
                             dessert.getCode(),
                             dessert.getName(),
                             dessert.getPrice(),
-                            ((LightDessert) dessert).getDescription(),
-                            ((LightDessert) dessert).getSweetener());
+                            ((LightDessert) dessert).getSweetener(),
+                            ((LightDessert) dessert).getDescription());
 
                 } else {
                     dessertDTO = new DessertDTO(
@@ -119,6 +119,15 @@ public class LogicLayer extends UnicastRemoteObject implements ILogicLayer {
 
             if (dessert == null) {
                 throw new DessertNotFoundException("Dessert with provided code was not found");
+            }
+
+            if (dessert instanceof LightDessert ld) {
+                return new LightDessertDTO(
+                        ld.getCode(),
+                        ld.getName(),
+                        ld.getPrice(),
+                        ld.getSweetener(),
+                        ld.getDescription());
             }
 
             return new DessertDTO(
