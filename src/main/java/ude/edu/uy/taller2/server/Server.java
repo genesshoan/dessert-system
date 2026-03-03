@@ -9,6 +9,12 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+/**
+ * Clase ejecutable que inicia el servidor RMI de la aplicación.
+ * Registra la instancia de {@link ude.edu.uy.taller2.logic.LogicLayer} en
+ * el registro RMI usando los valores de configuración provistos por
+ * {@link ude.edu.uy.taller2.Config}.
+ */
 public class Server {
     public static void main(String[] args) {
         try {
