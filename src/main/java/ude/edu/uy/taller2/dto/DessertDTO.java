@@ -40,6 +40,10 @@ public class DessertDTO implements Serializable {
         return price;
     }
 
+    public String getType() {
+        return "Normal";
+    }
+
     @Override
     public String toString() {
         return String.format("DessertDTO{code=%s, name=%s, price=%s}",
