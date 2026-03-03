@@ -20,6 +20,8 @@ import java.util.List;
  * básicas como añadir o eliminar unidades y obtener resúmenes.
  */
 public class Sale implements Serializable {
+    private static final long serialVersionUID = 3L;
+
     private final int MAX_UNITS_PER_SALE = 40;
 
     private long id;

@@ -7,6 +7,8 @@ import java.math.BigDecimal;
  * Representa un postre con código, nombre y precio.
  */
 public class Dessert implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String code;
     private String name;
     private BigDecimal price;

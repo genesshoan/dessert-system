@@ -10,6 +10,8 @@ import java.math.BigDecimal;
  * Proporciona utilidades para obtener el monto total del item y su resumen.
  */
 public class SaleItem implements Serializable {
+    private static final long serialVersionUID = 4L;
+
     private int quantity;
     private Dessert dessert;
 

@@ -26,7 +26,7 @@ public class DessertCreationForm extends JDialog {
     private final JTextField sweetenerField;
     private final JTextField descriptionField;
 
-    private DessertDTO result;
+    private DessertDTO result = null;
 
     /**
      * Crea y configura el diálogo modal para ingresar los datos de un postre.

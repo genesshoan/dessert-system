@@ -7,6 +7,8 @@ import java.math.BigDecimal;
  * Subclase de Dessert que representa un postre light con edulcorante y descripción.
  */
 public class LightDessert extends Dessert implements Serializable {
+    private static final long serialVersionUID = 2L;
+
     private String sweetener;
     private String description;
 

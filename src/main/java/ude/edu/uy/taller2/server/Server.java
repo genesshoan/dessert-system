@@ -27,8 +27,6 @@ public class Server {
             Naming.rebind(Config.getURL(), logicLayer);
 
             System.out.println("Server is running now...");
-
-            logicLayer.getAllDesserts().forEach(System.out::println);
         } catch (RemoteException | MalformedURLException e) {
             System.out.println("Something unexpected has occurred");
             e.printStackTrace();
