@@ -23,7 +23,7 @@ public class CreateSaleController extends BaseController<SaleCreationDialog> {
             logicLayer.createSale(address, date);
             return true;
         } catch (RequiredFieldIsEmptyException | InvalidDateException e) {
-            showError("Invalid input", e.getMessage());
+            invalidInput(e);
         } catch (RemoteException e) {
             connectionError();
         }

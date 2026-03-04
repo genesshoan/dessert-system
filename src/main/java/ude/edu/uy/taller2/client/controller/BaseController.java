@@ -35,4 +35,8 @@ public abstract class BaseController<V extends Component> {
     protected void connectionError() {
         showError("Connection error", "Server is not available right now");
     }
+
+    protected void invalidInput(Exception e) {
+        showError("InvalidInput", e.getMessage());
+    }
 }
