@@ -1,4 +1,4 @@
-package ude.edu.uy.taller2.domain;
+package ude.edu.uy.taller2.server.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

@@ -1,15 +1,15 @@
 package ude.edu.uy.taller2;
 
-import ude.edu.uy.taller2.collection.Desserts;
-import ude.edu.uy.taller2.collection.SaleDecision;
-import ude.edu.uy.taller2.collection.SaleFilter;
-import ude.edu.uy.taller2.collection.Sales;
-import ude.edu.uy.taller2.domain.Dessert;
-import ude.edu.uy.taller2.domain.LightDessert;
-import ude.edu.uy.taller2.domain.Sale;
+import ude.edu.uy.taller2.server.collection.Desserts;
+import ude.edu.uy.taller2.server.collection.SaleDecision;
+import ude.edu.uy.taller2.server.collection.SaleFilter;
+import ude.edu.uy.taller2.server.collection.Sales;
+import ude.edu.uy.taller2.server.domain.Dessert;
+import ude.edu.uy.taller2.server.domain.LightDessert;
+import ude.edu.uy.taller2.server.domain.Sale;
 import ude.edu.uy.taller2.exception.AppDataPersistenceException;
-import ude.edu.uy.taller2.persistence.AppData;
-import ude.edu.uy.taller2.persistence.Persistence;
+import ude.edu.uy.taller2.server.persistence.AppData;
+import ude.edu.uy.taller2.server.persistence.Persistence;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,7 +1,7 @@
-package ude.edu.uy.taller2.persistence;
+package ude.edu.uy.taller2.server.persistence;
 
-import ude.edu.uy.taller2.collection.Desserts;
-import ude.edu.uy.taller2.collection.Sales;
+import ude.edu.uy.taller2.server.collection.Desserts;
+import ude.edu.uy.taller2.server.collection.Sales;
 
 import java.io.Serializable;
 
@@ -11,6 +11,8 @@ import java.io.Serializable;
  * estado completo de la aplicación.
  */
 public class AppData implements Serializable {
+    private static final long serialVersionUID = 7L;
+
     private final Desserts desserts;
     private final Sales sales;
 

@@ -1,8 +1,8 @@
 package ude.edu.uy.taller2;
 
-import ude.edu.uy.taller2.collection.Desserts;
-import ude.edu.uy.taller2.domain.Dessert;
-import ude.edu.uy.taller2.domain.LightDessert;
+import ude.edu.uy.taller2.server.collection.Desserts;
+import ude.edu.uy.taller2.server.domain.Dessert;
+import ude.edu.uy.taller2.server.domain.LightDessert;
 
 import java.math.BigDecimal;
 

@@ -1,6 +1,6 @@
 package ude.edu.uy.taller2.dto;
 
-import ude.edu.uy.taller2.domain.SaleStatus;
+import ude.edu.uy.taller2.server.domain.SaleStatus;
 
 import java.io.Serializable;
 import java.time.LocalDate;

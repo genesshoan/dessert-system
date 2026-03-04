@@ -1,8 +1,8 @@
 package ude.edu.uy.taller2;
 
-import ude.edu.uy.taller2.domain.Dessert;
-import ude.edu.uy.taller2.domain.Sale;
-import ude.edu.uy.taller2.domain.SaleStatus;
+import ude.edu.uy.taller2.server.domain.Dessert;
+import ude.edu.uy.taller2.server.domain.Sale;
+import ude.edu.uy.taller2.server.domain.SaleStatus;
 import ude.edu.uy.taller2.exception.DessertNotFoundException;
 import ude.edu.uy.taller2.exception.InvalidSaleOperationException;
 import ude.edu.uy.taller2.exception.InsufficientUnitsException;

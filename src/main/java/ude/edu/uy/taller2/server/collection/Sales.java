@@ -1,9 +1,9 @@
-package ude.edu.uy.taller2.collection;
+package ude.edu.uy.taller2.server.collection;
 
-import ude.edu.uy.taller2.domain.Dessert;
-import ude.edu.uy.taller2.domain.Sale;
-import ude.edu.uy.taller2.domain.SaleItem;
-import ude.edu.uy.taller2.domain.SaleStatus;
+import ude.edu.uy.taller2.server.domain.Dessert;
+import ude.edu.uy.taller2.server.domain.Sale;
+import ude.edu.uy.taller2.server.domain.SaleItem;
+import ude.edu.uy.taller2.server.domain.SaleStatus;
 import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 import ude.edu.uy.taller2.exception.SaleNotFoundException;
 import ude.edu.uy.taller2.exception.InvalidSaleOperationException;
@@ -22,6 +22,8 @@ import java.util.List;
  * buscar, modificar y finalizar ventas.
  */
 public class Sales implements Serializable {
+    private static final long serialVersionUID = 6L;
+
     private final LinkedList<Sale> sales;
     private long lastId = 0;
 

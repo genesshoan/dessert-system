@@ -1,7 +1,7 @@
-package ude.edu.uy.taller2.persistence;
+package ude.edu.uy.taller2.server.persistence;
 
-import ude.edu.uy.taller2.collection.Desserts;
-import ude.edu.uy.taller2.collection.Sales;
+import ude.edu.uy.taller2.server.collection.Desserts;
+import ude.edu.uy.taller2.server.collection.Sales;
 import ude.edu.uy.taller2.exception.AppDataPersistenceException;
 
 import java.io.*;

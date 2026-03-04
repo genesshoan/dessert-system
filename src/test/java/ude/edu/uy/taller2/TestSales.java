@@ -1,10 +1,10 @@
 package ude.edu.uy.taller2;
 
-import ude.edu.uy.taller2.collection.SaleDecision;
-import ude.edu.uy.taller2.collection.SaleFilter;
-import ude.edu.uy.taller2.collection.Sales;
-import ude.edu.uy.taller2.domain.Dessert;
-import ude.edu.uy.taller2.domain.Sale;
+import ude.edu.uy.taller2.server.collection.SaleDecision;
+import ude.edu.uy.taller2.server.collection.SaleFilter;
+import ude.edu.uy.taller2.server.collection.Sales;
+import ude.edu.uy.taller2.server.domain.Dessert;
+import ude.edu.uy.taller2.server.domain.Sale;
 import ude.edu.uy.taller2.dto.SalesSummaryDTO;
 import ude.edu.uy.taller2.exception.MaxUnitsExceededException;
 import ude.edu.uy.taller2.exception.InsufficientUnitsException;
