@@ -5,5 +5,13 @@ package ude.edu.uy.taller2.server.domain;
  */
 public enum SaleStatus {
     IN_PROGRESS,
-    COMPLETED
+    COMPLETED;
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case IN_PROGRESS -> "In progress";
+            case COMPLETED -> "Completed";
+        };
+    }
 }

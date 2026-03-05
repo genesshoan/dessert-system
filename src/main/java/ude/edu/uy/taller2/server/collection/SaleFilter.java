@@ -6,5 +6,22 @@ package ude.edu.uy.taller2.server.collection;
 public enum SaleFilter {
     ALL,
     PENDING,
-    FINISHED
+    FINISHED;
+
+    public static SaleFilter fromString(String value) {
+        return switch (value) {
+            case "Finished" -> FINISHED;
+            case "Pending" -> PENDING;
+            default -> ALL;
+        };
+    }
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case ALL -> "All";
+            case PENDING -> "Pending";
+            case FINISHED -> "Finished";
+        };
+    }
 }
