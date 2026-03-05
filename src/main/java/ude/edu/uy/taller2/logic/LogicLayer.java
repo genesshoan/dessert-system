@@ -266,6 +266,7 @@ public class LogicLayer extends UnicastRemoteObject implements ILogicLayer {
                     sale.getId(),
                     sale.getDate(),
                     sale.getAddress(),
+                    sale.getTotalAmount(),
                     sale.getStatus());
         } finally {
             monitor.releaseWrite();
@@ -339,6 +340,7 @@ public class LogicLayer extends UnicastRemoteObject implements ILogicLayer {
                             s.getId(),
                             s.getDate(),
                             s.getAddress(),
+                            s.getTotalAmount(),
                             s.getStatus()))
                     .toList();
         } finally {

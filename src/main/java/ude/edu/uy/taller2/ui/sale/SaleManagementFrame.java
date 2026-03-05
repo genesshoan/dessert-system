@@ -33,7 +33,7 @@ public class SaleManagementFrame extends JFrame {
         panelNorth = new JPanel(new FlowLayout());
         panelSouth = new JPanel(new FlowLayout());
 
-        String[] columns = {"ID", "Date", "Address", "Status", "DTO"};
+        String[] columns = {"ID", "Date", "Address", "Total", "Status", "DTO"};
         model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -42,7 +42,7 @@ public class SaleManagementFrame extends JFrame {
         };
 
         table = new JTable(model);
-        table.removeColumn(table.getColumnModel().getColumn(4));
+        table.removeColumn(table.getColumnModel().getColumn(5));
 
         btnAddSale = new JButton("Add sale");
         btnUpdate = new JButton("Update");
@@ -91,11 +91,15 @@ public class SaleManagementFrame extends JFrame {
             }
 
             int modelRow = table.convertRowIndexToModel(selectedRow);
-            SaleDTO saleDTO = (SaleDTO) model.getValueAt(modelRow, 4);
+            SaleDTO saleDTO = (SaleDTO) model.getValueAt(modelRow, 5);
 
             SaleDetailDialog saleDetailDialog = new SaleDetailDialog(this, saleDTO);
 
             saleDetailDialog.setVisible(saleDetailDialog.isConnected());
+
+            if (saleDetailDialog.wasFinalized()) {
+                refreshTable();
+            }
         });
 
         table.addMouseListener(new MouseAdapter() {
@@ -146,6 +150,7 @@ public class SaleManagementFrame extends JFrame {
                                 s.getId(),
                                 s.getDate(),
                                 s.getAddress(),
+                                s.getTotalAmount(),
                                 s.getStatus(),
                                 s
                         });

@@ -3,6 +3,7 @@ package ude.edu.uy.taller2.dto;
 import ude.edu.uy.taller2.server.domain.SaleStatus;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -13,6 +14,7 @@ public class SaleDTO implements Serializable {
     private long id;
     private LocalDate date;
     private String address;
+    private BigDecimal totalAmount;
     private SaleStatus status;
 
     /**
@@ -23,10 +25,11 @@ public class SaleDTO implements Serializable {
      * @param address delivery/address for the sale
      * @param status  current sale status
      */
-    public SaleDTO(long id, LocalDate date, String address, SaleStatus status) {
+    public SaleDTO(long id, LocalDate date, String address, BigDecimal totalAmount, SaleStatus status) {
         this.id = id;
         this.date = date;
         this.address = address;
+        this.totalAmount = totalAmount;
         this.status = status;
     }
 
@@ -48,6 +51,10 @@ public class SaleDTO implements Serializable {
     /** Returns the current status of the sale. */
     public SaleStatus getStatus() {
         return status;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
     }
 
     @Override

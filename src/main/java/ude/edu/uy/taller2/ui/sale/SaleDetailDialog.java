@@ -10,12 +10,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 public class SaleDetailDialog extends JDialog {
     private final SaleDetailController saleDetailController;
 
     private final SaleDTO saleDto;
+    private BigDecimal total;
+    private boolean finalized = false;
 
     private final JPanel panelInfo;
     private final JPanel panelAdd;
@@ -55,7 +56,7 @@ public class SaleDetailDialog extends JDialog {
                 saleDTO.getDate(),
                 saleDTO.getStatus()));
 
-        lblTotal = new JLabel("Total: $0.00");
+        lblTotal = new JLabel("Total: $0.0");
 
         dessertCodeField = new JTextField(10);
         quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 40, 1));
@@ -65,7 +66,7 @@ public class SaleDetailDialog extends JDialog {
         btnComplete = new JButton("Complete");
         btnCancel = new JButton("Cancel sale");
 
-        String[] columns = {"Code", "Name", "Price", "Quantity", "DTO"};
+        String[] columns = {"Code", "Name", "Price", "Quantity", "Type", "DTO"};
         model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -74,7 +75,7 @@ public class SaleDetailDialog extends JDialog {
         };
 
         table = new JTable(model);
-        table.removeColumn(table.getColumnModel().getColumn(4));
+        table.removeColumn(table.getColumnModel().getColumn(5));
         scrollPane = new JScrollPane(table);
 
         // Configuracion
@@ -144,8 +145,12 @@ public class SaleDetailDialog extends JDialog {
         return saleDetailController.isConnected();
     }
 
+    public boolean wasFinalized() {
+        return finalized;
+    }
+
     private void refreshTotal() {
-        BigDecimal total = BigDecimal.ZERO;
+        total = BigDecimal.ZERO;
         for (int i = 0; i < model.getRowCount(); i++) {
             BigDecimal price = (BigDecimal) model.getValueAt(i, 2);
             int quantity = (int) model.getValueAt(i, 3);
@@ -160,6 +165,15 @@ public class SaleDetailDialog extends JDialog {
                 saleDto.getId(),
                 saleDecision
         )) {
+            finalized = true;
+
+            if (saleDecision == SaleDecision.COMPLETE) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Total: " + total.toPlainString(),
+                        "Sale completed successfully",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
             dispose();
         }
     }
@@ -173,6 +187,7 @@ public class SaleDetailDialog extends JDialog {
                         s.getDessert().getName(),
                         s.getDessert().getPrice(),
                         s.getQuantity(),
+                        s.getDessert().getType(),
                         s
         }));
 
