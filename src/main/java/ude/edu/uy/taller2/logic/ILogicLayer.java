@@ -1,7 +1,7 @@
 package ude.edu.uy.taller2.logic;
 
-import ude.edu.uy.taller2.collection.SaleDecision;
-import ude.edu.uy.taller2.collection.SaleFilter;
+import ude.edu.uy.taller2.server.collection.SaleDecision;
+import ude.edu.uy.taller2.server.collection.SaleFilter;
 import ude.edu.uy.taller2.dto.DessertDTO;
 import ude.edu.uy.taller2.dto.SaleDTO;
 import ude.edu.uy.taller2.dto.SaleItemDTO;
