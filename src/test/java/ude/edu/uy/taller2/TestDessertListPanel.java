@@ -2,7 +2,7 @@ package ude.edu.uy.taller2;
 
 import ude.edu.uy.taller2.client.controller.DessertController;
 import ude.edu.uy.taller2.logic.ILogicLayer;
-import ude.edu.uy.taller2.ui.dessert.DessertListPanel;
+import ude.edu.uy.taller2.ui.dessert.DessertManagementFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +18,7 @@ public class TestDessertListPanel {
             JFrame frame = new JFrame("Test - Dessert List Panel");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setBounds(100, 100, 600, 400);
-            frame.setContentPane(new DessertListPanel(dessertController));
+            frame.setContentPane(new DessertManagementFrame(null));
             frame.setVisible(true);
         });
     }
