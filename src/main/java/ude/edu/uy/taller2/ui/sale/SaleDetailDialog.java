@@ -92,6 +92,7 @@ public class SaleDetailDialog extends JDialog {
         panelAdd.add(new JLabel("Quantity:"));
         panelAdd.add(quantitySpinner);
         panelAdd.add(btnAdd);
+        panelAdd.add(btnRemove);
 
         JPanel panelNorth = new JPanel(new BorderLayout());
         panelNorth.add(panelInfo, BorderLayout.NORTH);
@@ -101,7 +102,6 @@ public class SaleDetailDialog extends JDialog {
         panelTotal.add(lblTotal);
 
         panelButtons.setBorder(new EmptyBorder(5, 10, 5, 10));
-        panelButtons.add(btnRemove);
         panelButtons.add(btnComplete);
         panelButtons.add(btnCancel);
 
