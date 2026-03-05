@@ -18,8 +18,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class ListSaleController extends BaseController<SaleManagementFrame> {
-    private SaleManagementFrame view;
-
     public ListSaleController(SaleManagementFrame view) {
         super(view);
     }
