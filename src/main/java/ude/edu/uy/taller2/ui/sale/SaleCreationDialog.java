@@ -68,7 +68,7 @@ public class SaleCreationDialog extends JDialog {
             }
 
             try {
-                dateSpinner.commitEdit(); // valida si escribieron manualmente
+                dateSpinner.commitEdit();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this,
                         "Invalid date format",

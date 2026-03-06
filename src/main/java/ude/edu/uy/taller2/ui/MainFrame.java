@@ -1,5 +1,6 @@
 package ude.edu.uy.taller2.ui;
 
+import ude.edu.uy.taller2.client.controller.persistence.PersistenceController;
 import ude.edu.uy.taller2.ui.dessert.DessertManagementFrame;
 import ude.edu.uy.taller2.ui.sale.SaleManagementFrame;
 
@@ -53,6 +54,13 @@ public class MainFrame extends JFrame {
         dessertsItem.addActionListener((e) -> {
             DessertManagementFrame dessertManagementFrame = new DessertManagementFrame(this);
             dessertManagementFrame.setVisible(dessertManagementFrame.isConnected());
+        });
+
+        saveItem.addActionListener((e) -> {
+            PersistenceController persistenceController = new PersistenceController(this);
+            if (persistenceController.isConnected()) {
+                persistenceController.saveData();
+            }
         });
     }
 }

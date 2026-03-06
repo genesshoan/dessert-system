@@ -22,6 +22,7 @@ public class CreateDessertController extends BaseController<DessertCreationForm>
     public boolean createDessert(DessertDTO dessertDTO) {
         try {
             logicLayer.createDessert(dessertDTO);
+            showInfo("Create dessert operation", "Dessert created successfully");
             return true;
         } catch (RequiredFieldIsEmptyException | DessertAlreadyExistsException | InvalidAmountException e) {
             invalidInput(e);

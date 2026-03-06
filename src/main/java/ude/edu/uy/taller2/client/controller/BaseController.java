@@ -32,6 +32,10 @@ public abstract class BaseController<V extends Component> {
         JOptionPane.showMessageDialog(view, message, title, JOptionPane.ERROR_MESSAGE);
     }
 
+    protected void showInfo(String title, String message) {
+        JOptionPane.showMessageDialog(view, message, title, JOptionPane.INFORMATION_MESSAGE);
+    }
+
     protected void connectionError() {
         showError("Connection error", "Server is not available right now");
     }

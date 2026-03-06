@@ -45,6 +45,7 @@ public class SaleDetailController extends BaseController<SaleDetailDialog> {
     public boolean addDessertUnits(String dessertCode, long saleId, int units) {
         try {
             logicLayer.addDessertUnits(dessertCode, saleId, units);
+            showInfo("Add desserts operation", "Desserts units added successfully");
             return true;
         } catch (MaxUnitsExceededException | DessertNotFoundException | SaleNotFoundException | InvalidSaleOperationException
                 | RequiredFieldIsEmptyException e) {
@@ -66,6 +67,7 @@ public class SaleDetailController extends BaseController<SaleDetailDialog> {
     public boolean deleteDessertUnits(String dessertCode, long saleId, int units) {
         try {
             logicLayer.deleteDessertUnits(dessertCode, saleId, units);
+            showInfo("Delete desserts operation", "Desserts units deleted successfully");
             return true;
         } catch (InsufficientUnitsException | SaleNotFoundException | DessertNotFoundException | InvalidSaleOperationException e) {
             invalidInput(e);
@@ -85,6 +87,7 @@ public class SaleDetailController extends BaseController<SaleDetailDialog> {
     public boolean finalizeSale(long id, SaleDecision saleDecision) {
         try {
             logicLayer.finalizeSale(id, saleDecision);
+            showInfo("Finalize desserts operation", "Sale finalized successfully");
             return true;
         } catch (SaleNotFoundException | InvalidSaleOperationException e) {
             invalidInput(e);

@@ -21,6 +21,7 @@ public class CreateSaleController extends BaseController<SaleCreationDialog> {
     public boolean createSale(String address, LocalDate date) {
         try {
             logicLayer.createSale(address, date);
+            showInfo("Create operation", "Sale created successfully");
             return true;
         } catch (RequiredFieldIsEmptyException | InvalidDateException e) {
             invalidInput(e);
