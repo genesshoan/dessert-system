@@ -448,7 +448,7 @@ public class LogicLayer extends UnicastRemoteObject implements ILogicLayer {
      * @param s cadena a comprobar
      * @return true si la cadena es null o está en blanco
      */
-    public static boolean isNullOrBlank(String s) {
+    private static boolean isNullOrBlank(String s) {
         return s == null || s.isBlank();
     }
 }

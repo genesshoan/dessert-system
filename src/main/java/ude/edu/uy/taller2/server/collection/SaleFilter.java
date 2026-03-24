@@ -8,14 +8,6 @@ public enum SaleFilter {
     PENDING,
     FINISHED;
 
-    public static SaleFilter fromString(String value) {
-        return switch (value) {
-            case "Finished" -> FINISHED;
-            case "Pending" -> PENDING;
-            default -> ALL;
-        };
-    }
-
     @Override
     public String toString() {
         return switch (this) {
